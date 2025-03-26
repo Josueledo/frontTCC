@@ -1,0 +1,112 @@
+
+
+<div class="container">
+  <nav class="nav">
+    <div class="title">Save<span>Guard</span></div>
+
+
+    <div class="items">
+
+    
+    <div class="category">General</div>
+    <ul>
+      <li class="active">
+        <fa-icon [icon]="faLayerGroup"></fa-icon>
+        <span>Overview</span>
+    </li>
+      <li>
+        <fa-icon [icon]="faFile"></fa-icon>
+        <span>Files</span>
+    </li>
+    </ul>
+    <div class="category">Reports</div>
+    <ul>
+      <li>
+        <fa-icon [icon]="faBell"></fa-icon>
+        <span>Threat Details</span>
+    </li>
+      <li>
+        <fa-icon [icon]="faBell"></fa-icon>
+        <span>Thereats</span>
+    </li>
+    </ul>
+    <div class="category">Senttings</div>
+    <ul>
+      <li>
+        <fa-icon [icon]="faQuestion"></fa-icon>
+        <span>Help & Supports</span>
+      </li>
+      <li>
+        <fa-icon [icon]="faGear"></fa-icon>
+        <span>Settings</span>
+    </li>
+    </ul>
+  </div>
+    <div class="footer">VertexGuard</div>
+  </nav>
+  <div class="content">
+
+
+    
+
+ 
+    <ul class="header">
+      <li class="card">
+        <div class="icon">
+          <fa-icon [icon]="faExpand"></fa-icon>
+        </div>
+        <span>Last 15 minuts: </span>
+        <div class="count">{{ requestCount }}</div>
+      </li>
+      <li class="card">
+        <div class="icon">
+          <fa-icon [icon]="faExpand"></fa-icon>
+        </div>
+        <span>Last 1 minut: </span>
+        <div class="count">{{ requestCount }}</div>
+      </li>
+      <li class="card">
+        <div class="icon">
+          <fa-icon [icon]="faExpand"></fa-icon>
+        </div>
+        <span>Ameaças Mitigadas:</span>
+        <div class="count">0</div>
+      </li>
+      <li class="card">
+        <div class="icon">
+          <fa-icon [icon]="faExpand"></fa-icon>
+        </div>
+        <span>Ameaças Mitigadas:</span>
+        <div class="count">0</div>
+      </li>
+    </ul>
+    <div class="footer">
+      <div class="left">
+        <div class="card">
+          <canvas id="MyChart">{{chart}}</canvas>
+
+        </div>
+        <div class="logs">
+          <h1>Logs em Tempo Real</h1>
+          <ul>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
+            <!-- <li *ngFor="let log of logs">{{ log }}</li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <div class="card">
+          <canvas id="RadarChart">{{chart2}}</canvas>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+$background: rgb(33, 32, 44);
+$backgroundDark: rgb(16, 16, 17);
+$primary:rgb(123, 2, 192);
+$primaryHover:rgba(122, 69, 153, 0.075);
