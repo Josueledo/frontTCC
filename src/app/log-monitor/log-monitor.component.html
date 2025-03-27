@@ -2,7 +2,7 @@
 
 <div class="container">
   <nav class="nav">
-    <div class="title">Save<span>Guard</span></div>
+    <div class="title">ATA<span>LAIA</span></div>
 
 
     <div class="items">
@@ -77,32 +77,66 @@
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
         <span>Ameaças Mitigadas:</span>
-        <div class="count">0</div>
+        <div echarts [options]="radialOption" class="chart-container"></div>
+
       </li>
     </ul>
     <div class="footer">
       <div class="left">
-        <div class="card">
-          <canvas id="MyChart">{{chart}}</canvas>
+        <ul class="card">
+          <span>Threat by device</span>
+          <li>
+            <div class="device_container">
 
-        </div>
+              <div class="icon">
+                <fa-icon [icon]="faMobile"></fa-icon>
+              </div>
+              <div class="device">
+                <span>Last Device IP</span>
+                <h3>{{lastMobile}}</h3>
+              </div>
+            </div>
+            <div class="graph">
+              <div echarts [options]="mobile" class="chart-container"></div>
+
+
+            </div>
+          </li>
+          <li>
+            <div class="device_container">
+
+              <div class="icon">
+                <fa-icon [icon]="faDesktop"></fa-icon>
+              </div>
+              <div class="device">
+                <span>Last Device IP</span>
+                <h3>{{lastDesktop}}</h3>
+              </div>
+            </div>
+            <div class="graph">
+              <div echarts [options]="desktop" class="chart-container"></div>
+
+
+            </div>
+          </li>
+        </ul>
         <div class="logs">
           <h1>Logs em Tempo Real</h1>
           <ul>
+            <!-- <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li> -->
+            <!-- <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
             <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
             <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
             <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
             <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <!-- <li *ngFor="let log of logs">{{ log }}</li> -->
+            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li> -->
+            <li *ngFor="let log of logs">{{ log }}</li>
           </ul>
         </div>
       </div>
       <div class="right">
         <div class="card">
-          <canvas id="RadarChart">{{chart2}}</canvas>
+          <div echarts [options]="mainOption" class="chart-container"></div>
 
         </div>
       </div>

@@ -42,6 +42,43 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+        .card{
+            color: rgb(190, 187, 187);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            .icon{
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: $primary;
+                color: white;
+                font-size: .8rem;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
+            .chart-container{
+                height: 100%;
+                width: 100%;
+            }
+            span{
+                font-size: .8rem;
+                position: absolute;
+                top: 15px;
+                left: 15px;
+            }
+            .count{
+                margin-top: 20px;
+                font-size: 3rem;
+                font-weight: 500;
+            }
+        }
         li{
             width: 25%;
             height: 120px;
@@ -65,6 +102,68 @@
                 background-color: $background;
                 width: 430px;
                 height: 210px;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                border-radius: 10px;
+                justify-content: center;
+                padding: 20px;
+                span{
+                    color: rgb(239, 236, 236);
+                }
+                li{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 40px;
+                    .device_container{
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                        height: 50%;
+                        width: 100%;
+                        padding:0px 10px;
+                        gap: 20px;
+                    }
+                    fa-icon{
+                        color: rgb(230, 227, 227);
+
+                    }
+                    .icon{
+                        font-size: 1rem;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: rgba(99, 97, 97, 0.645);
+                    }
+                    .device{
+                        span{
+                            font-size: .7rem;
+                            color: gray;
+                            font-weight:500;
+                        }
+                        h3{
+                            font-size: 1rem;
+                            color: rgb(239, 238, 238);
+                            font-weight: 500;
+                        }
+                    }
+                    .graph{
+                        width: 150px;
+                        max-height: 100px;
+                        // background-color: red;
+                       .chart-container{
+                        width: 200px;
+                        height: 80px;
+                       } 
+                    }
+                    border-bottom: 1px solid rgba(128, 128, 128, 0.359);
+
+                }
             }
             .logs{
                 background-color: $background;
@@ -81,11 +180,13 @@
                 }
                 ul{
                     display: flex;
-                    flex-direction: column;
-                    align-items: start;
-                    justify-content: center;
+                    flex-direction: column-reverse;
+                    align-items: center;
+                    justify-content: start;
+                    margin-top: 10px;
                     gap: 10px;
                     width: 100%;
+                    height: 100%;
                     li{
                         width: 100%;
                         list-style: none;
@@ -108,45 +209,16 @@
                 background-color: $background;
                 width: 100%;
                 height: 100%;
-
+                color: white;
+                border-radius: 10px;
+                padding: 20px;
+              
             }
         }
     }
 }
 
-.card{
-    color: rgb(190, 187, 187);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    .icon{
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background-color: $primary;
-        color: white;
-        font-size: .8rem;
-        position: absolute;
-        right: 15px;
-        top: 15px;
-    }
-    span{
-        font-size: .8rem;
-        position: absolute;
-        top: 15px;
-        left: 15px;
-    }
-    .count{
-        margin-top: 20px;
-        font-size: 3rem;
-        font-weight: 500;
-    }
-}
+
 .nav{
     width: 230px;
     height: 100vh;
@@ -232,3 +304,5 @@
     background: $primary;
     border-radius: 10px;
   }
+
+ 
