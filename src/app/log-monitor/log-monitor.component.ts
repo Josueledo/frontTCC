@@ -24,7 +24,6 @@ import * as echarts from 'echarts';
   providers: [provideEchartsCore({ echarts })],
 })
 export class LogMonitorComponent {
-
   logs: string[] = [];
   requestCount = 2;
   faMobile = faMobile;
@@ -38,11 +37,17 @@ export class LogMonitorComponent {
   base = +new Date(1968, 9, 3);
   oneDay = 24 * 3600 * 1000;
   date: string[] = [];
-  lastMobile:any = []
-  lastDesktop:any = []
-  requestLastMobile = 0
-  requestLastDesktop = 0
+  lastMobile: any = [];
+  lastDesktop: any = [];
+  requestLastMobile = 0;
+  requestLastDesktop = 0;
   data: number[] = [Math.random() * 300];
+  logsPorMinuto: { [key: string]: number } = {};
+  ofensasPorMinuto: { [key: string]: number } = {};
+  requestCounts: { [ip: string]: number } = {};
+  blockedIPs: Set<string> = new Set();
+  MAX_REQUESTS_PER_MINUTE = 100;
+  ipCounts: Map<string, number> = new Map();
 
   mobile = {
     tooltip: {
@@ -121,18 +126,18 @@ export class LogMonitorComponent {
 
   mainOption = {
     title: {
-      color:['#fffff'],
-      text: 'Request vs Offenses',
-      subtext: 'Data',
+      color: ['#fffff'],
+      text: 'Requests per minute',
+      subtext: 'Dados simulados',
     },
     tooltip: {
       trigger: 'axis',
     },
     legend: {
-      color:['#fffff'],
-      data: ['Request', 'Offense'],
+      color: ['#fffff'],
+      data: ['Requests'],
     },
-    color: ['rgb(123, 2, 192)', 'rgb(67, 39, 119)'],
+    color: ['rgb(123, 2, 192)'],
     toolbox: {
       show: true,
       feature: {
@@ -145,11 +150,21 @@ export class LogMonitorComponent {
     calculable: true,
     xAxis: [
       {
-        color:['#fff'],
-
         type: 'category',
-        // prettier-ignore
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        data: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
       },
     ],
     yAxis: [
@@ -166,28 +181,12 @@ export class LogMonitorComponent {
         ],
         markPoint: {
           data: [
-            { type: 'max', name: 'Max' },
-            { type: 'min', name: 'Min' },
+            { type: 'max', name: 'Máximo' },
+            { type: 'min', name: 'Mínimo' },
           ],
         },
         markLine: {
-          data: [{ type: 'average', name: 'Avg' }],
-        },
-      },
-      {
-        name: 'Offenses',
-        type: 'bar',
-        data: [
-          2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,
-        ],
-        markPoint: {
-          data: [
-            { name: 'Max', value: 182.2, xAxis: 7, yAxis: 183 },
-            { name: 'Min', value: 2.3, xAxis: 11, yAxis: 3 },
-          ],
-        },
-        markLine: {
-          data: [{ type: 'average', name: 'Avg' }],
+          data: [{ type: 'average', name: 'Média' }],
         },
       },
     ],
@@ -197,16 +196,16 @@ export class LogMonitorComponent {
     color: ['rgb(255, 149, 0)', 'rgba(110, 109, 111, 0.43)'],
 
     tooltip: {
-      trigger: 'item'
+      trigger: 'item',
     },
     legend: {
-      show:false,
+      show: false,
       top: '5%',
       left: 'center',
     },
     series: [
       {
-        label:{show:false},
+        label: { show: false },
         name: 'Access From',
         type: 'pie',
         radius: ['40%', '70%'],
@@ -217,12 +216,10 @@ export class LogMonitorComponent {
         data: [
           { value: this.requestCount, name: 'Search Engine' },
           { value: 10, name: 'Direct' },
-         
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   };
-  
 
   constructor(private logService: LogService) {}
 
@@ -237,24 +234,72 @@ export class LogMonitorComponent {
 
     this.logService.getLogs().subscribe({
       next: (log) => {
-        console.log('Log adicionado à lista:', log); // Log de depuração
-        this.logs.push(log); // Adiciona o log à lista
-        if (log.includes("Android")) {
-          const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
-          
-          if (ipMatch) {
-              this.lastMobile = ipMatch[1]; // Pegando apenas o IP      
-              this.requestLastMobile = this.logs.filter(l => l.includes(this.lastMobile)).length;
-      
-          }
-      }else{
+        this.logs.push(log);
+
         const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
-        this.lastDesktop = ipMatch![1]; // Pegando apenas o IP  
-        console.log(this.lastDesktop)    
-          this.requestLastDesktop = this.logs.filter(l => l.includes(this.lastDesktop)).length;
+        const ip = ipMatch ? ipMatch[1] : null;
+
+        if (ip) {
+          // Bloqueado? Ignora.
+          if (this.blockedIPs.has(ip)) {
+            console.warn(`❌ IP ${ip} está bloqueado e foi ignorado.`);
+            return;
+          }
+
+          // Conta a requisição
+          const atual = this.ipCounts.get(ip) || 0;
+          this.ipCounts.set(ip, atual + 1);
+
+          // Verifica possível DDoS
+          if (this.ipCounts.get(ip)! > this.MAX_REQUESTS_PER_MINUTE) {
+            console.warn(`🚨 IP ${ip} bloqueado por possível DDoS.`);
+
+            this.blockedIPs.add(ip);
+
+            setTimeout(() => {
+              this.blockedIPs.delete(ip);
+              console.log(`🔓 IP ${ip} desbloqueado após 2 minutos.`);
+              this.ipCounts.delete(ip); // limpa contagem também
+
+            }, 2 * 60 * 1000); // 2 minutos
+          }
         }
 
+        // Aqui segue sua lógica para mobile/desktop
+        if (log.includes('Android')) {
+          if (ip) {
+            this.lastMobile = ip;
+            this.requestLastMobile = this.logs.filter((l) =>
+              l.includes(this.lastMobile)
+            ).length;
+          }
+        } else {
+          if (ip) {
+            this.lastDesktop = ip;
+            console.log(this.lastDesktop);
+            this.requestLastDesktop = this.logs.filter((l) =>
+              l.includes(this.lastDesktop)
+            ).length;
+          }
+        }
 
+        if (log.includes('Android')) {
+          const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
+
+          if (ipMatch) {
+            this.lastMobile = ipMatch[1]; // Pegando apenas o IP
+            this.requestLastMobile = this.logs.filter((l) =>
+              l.includes(this.lastMobile)
+            ).length;
+          }
+        } else {
+          const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
+          this.lastDesktop = ipMatch![1]; // Pegando apenas o IP
+          console.log(this.lastDesktop);
+          this.requestLastDesktop = this.logs.filter((l) =>
+            l.includes(this.lastDesktop)
+          ).length;
+        }
       },
       error: (err) => {
         console.error('Erro ao receber logs:', err);
@@ -265,23 +310,76 @@ export class LogMonitorComponent {
     });
     this.logService.requestCount$.subscribe((count) => {
       this.requestCount = count;
-      this.updateChart()
+      this.updateChart();
+    });
+    this.logService.logsPorMinuto$.subscribe((dados) => {
+      const minutos = Object.keys(dados).sort(); // ordena por tempo
+      const valores = minutos.map((minuto) => dados[minuto]);
+
+      this.mainOption = {
+        ...this.mainOption,
+        xAxis: [
+          {
+            type: 'category',
+            data: minutos,
+          },
+        ],
+        series: [
+          {
+            name: 'Requests',
+            type: 'bar',
+            data: valores,
+            markPoint: {
+              data: [
+                { type: 'max', name: 'Máximo' },
+                { type: 'min', name: 'Mínimo' },
+              ],
+            },
+            markLine: {
+              data: [{ type: 'average', name: 'Média' }],
+            },
+          },
+        ],
+      };
     });
   }
 
-
   updateChart() {
-    this.radialOption = { ...this.radialOption, series: [{ ...this.radialOption.series[0], data: [
-      { value: this.requestCount, name: 'Search Engine' },
-      { value: 10, name: 'Direct' }
-    ] }]};
-    this.mobile = { ...this.mobile, series: [{ ...this.mobile.series[0], data: [
-      { value: this.requestLastMobile, name: 'Search Engine' },
-      { value: 10, name: 'Direct' }
-    ] }]};
-    this.desktop = { ...this.desktop, series: [{ ...this.desktop.series[0], data: [
-      { value: this.requestLastDesktop, name: 'Search Engine' },
-      { value: 10, name: 'Direct' }
-    ] }]};
+    this.radialOption = {
+      ...this.radialOption,
+      series: [
+        {
+          ...this.radialOption.series[0],
+          data: [
+            { value: this.requestCount, name: 'Search Engine' },
+            { value: 10, name: 'Direct' },
+          ],
+        },
+      ],
+    };
+    this.mobile = {
+      ...this.mobile,
+      series: [
+        {
+          ...this.mobile.series[0],
+          data: [
+            { value: this.requestLastMobile, name: 'Search Engine' },
+            { value: 10, name: 'Direct' },
+          ],
+        },
+      ],
+    };
+    this.desktop = {
+      ...this.desktop,
+      series: [
+        {
+          ...this.desktop.series[0],
+          data: [
+            { value: this.requestLastDesktop, name: 'Search Engine' },
+            { value: 10, name: 'Direct' },
+          ],
+        },
+      ],
+    };
   }
 }
