@@ -19,6 +19,7 @@ export class LogService {
     // Atualizar a contagem de requisições a cada 1 minuto
     interval(60000).subscribe(() => this.updateRequestCount());
   }
+  
 
   getLogs(): Observable<string> {
     

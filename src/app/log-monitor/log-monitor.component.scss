@@ -1,5 +1,6 @@
 @import "../../styles.scss";
-.container{
+
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,7 +11,8 @@
     padding: 35px;
     overflow: hidden;
 }
-.content{
+
+.content {
     width: 100%;
     height: auto;
     min-height: 600px;
@@ -25,31 +27,33 @@
     border-radius: 10px;
 
 
-    .header{
-        
-    }
-    .card_container{
+    .header {}
+
+    .card_container {
         background-color: $background;
         padding: 10px;
         border-radius: 10px;
         height: 100%;
 
     }
-    ul{
+
+    ul {
         height: 100%;
         width: 1200px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        .card{
+
+        .card {
             color: rgb(190, 187, 187);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            .icon{
+
+            .icon {
                 width: 30px;
                 height: 30px;
                 display: flex;
@@ -63,42 +67,49 @@
                 right: 15px;
                 top: 15px;
             }
-            .chart-container{
+
+            .chart-container {
                 height: 100%;
                 width: 100%;
             }
-            span{
+
+            span {
                 font-size: .8rem;
                 position: absolute;
                 top: 15px;
                 left: 15px;
             }
-            .count{
+
+            .count {
                 margin-top: 20px;
                 font-size: 3rem;
                 font-weight: 500;
             }
         }
-        li{
+
+        li {
             width: 25%;
             height: 120px;
             background-color: $background;
             list-style: none;
         }
     }
-    .footer{
+
+    .footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 1200px;
         gap: 10px;
-        .left{
+
+        .left {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             gap: 10px;
-            .card{
+
+            .card {
                 background-color: $background;
                 width: 430px;
                 height: 210px;
@@ -108,29 +119,34 @@
                 border-radius: 10px;
                 justify-content: center;
                 padding: 20px;
-                span{
+
+                span {
                     color: rgb(239, 236, 236);
                 }
-                li{
+
+                li {
                     width: 100%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     gap: 40px;
-                    .device_container{
+
+                    .device_container {
                         display: flex;
                         align-items: center;
                         justify-content: start;
                         height: 50%;
                         width: 100%;
-                        padding:0px 10px;
+                        padding: 0px 10px;
                         gap: 20px;
                     }
-                    fa-icon{
+
+                    fa-icon {
                         color: rgb(230, 227, 227);
 
                     }
-                    .icon{
+
+                    .icon {
                         font-size: 1rem;
                         width: 40px;
                         height: 40px;
@@ -140,45 +156,52 @@
                         justify-content: center;
                         background-color: rgba(99, 97, 97, 0.645);
                     }
-                    .device{
-                        span{
+
+                    .device {
+                        span {
                             font-size: .7rem;
                             color: gray;
-                            font-weight:500;
+                            font-weight: 500;
                         }
-                        h3{
+
+                        h3 {
                             font-size: 1rem;
                             color: rgb(239, 238, 238);
                             font-weight: 500;
                         }
                     }
-                    .graph{
+
+                    .graph {
                         width: 150px;
                         max-height: 100px;
+
                         // background-color: red;
-                       .chart-container{
-                        width: 200px;
-                        height: 80px;
-                       } 
+                        .chart-container {
+                            width: 200px;
+                            height: 80px;
+                        }
                     }
+
                     border-bottom: 1px solid rgba(128, 128, 128, 0.359);
 
                 }
             }
-            .logs{
+
+            .logs {
                 background-color: $background;
                 width: 430px;
                 height: 210px;
                 overflow-y: scroll;
                 overflow-x: hidden;
                 padding: 15px;
-              
-                h1{
+
+                h1 {
                     color: rgb(167, 167, 167);
                     font-size: .8rem;
                     font-weight: 400;
                 }
-                ul{
+
+                ul {
                     display: flex;
                     flex-direction: column-reverse;
                     align-items: center;
@@ -187,7 +210,8 @@
                     gap: 10px;
                     width: 100%;
                     height: 100%;
-                    li{
+
+                    li {
                         width: 100%;
                         list-style: none;
                         color: gray;
@@ -196,30 +220,32 @@
                         height: auto;
                     }
                 }
-                
+
             }
         }
-        .right{
+
+        .right {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 430px;
-            .card{
+
+            .card {
                 background-color: $background;
                 width: 100%;
                 height: 100%;
                 color: white;
                 border-radius: 10px;
                 padding: 20px;
-              
+
             }
         }
     }
 }
 
 
-.nav{
+.nav {
     width: 230px;
     height: 100vh;
     background-color: $background;
@@ -230,32 +256,38 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 30px;
-    .title{
+
+    .title {
         color: rgb(211, 211, 211);
         font-weight: 300;
-        span{
+
+        span {
             color: $primary;
             font-weight: 700;
         }
     }
-    .items{
+
+    .items {
         display: flex;
         flex-direction: column;
         gap: 25px;
     }
-    .category{
+
+    .category {
         color: rgb(119, 119, 119);
         font-size: .8rem;
     }
-    ul{
+
+    ul {
         display: flex;
         flex-direction: column;
         align-items: start;
         justify-content: center;
         list-style: none;
         gap: 10px;
-        li{
-            
+
+        li {
+
             display: flex;
             gap: 10px;
             justify-content: start;
@@ -266,15 +298,17 @@
             border-radius: 10px;
             padding: 15px 10px;
             transition: all .3s;
-            span{
+
+            span {
                 font-size: .8rem;
             }
 
-            &.active{
+            &.active {
                 background-color: $primary;
                 color: rgb(238, 238, 238);
             }
-            &:hover{
+
+            &:hover {
                 cursor: pointer;
                 background-color: $primary;
                 color: rgb(238, 238, 238);
@@ -282,27 +316,89 @@
         }
     }
 
-    .footer{
+    .footer {
         color: rgb(107, 107, 107);
         font-size: .6rem;
     }
 }
 
+.logs table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.logs th,
+.logs td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    font-weight: 400;
+    text-align: center;
+    color: rgb(216, 216, 216);
+}
+
+.logs th {
+    font-size: .9rem;
+
+}
+.logs .ip{
+    position: relative;
+    &:hover{
+        .popUp{
+            display: flex;
+        }
+    }
+    .popUp{
+        display: none;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary;
+        padding: 10px;
+        gap: 10px;
+        top: 0;
+    }
+}
+
+.logs td {
+    font-size: .8rem;
+    // overflow-y: auto;
+
+}
+
+.logs tr.sucesso {
+    background-color: #e0ffe0;
+}
+
+.logs tr.bloqueado {
+    background-color: #ffe0e0;
+}
+
+.logs tr.suspeito {
+    background-color: #fff3cd;
+}
+
+.logs tr.ddos {
+    background-color: #cce5ff;
+}
+
+.logs tr.normal {
+    background-color: transparent;
+}
+
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     border-radius: 10px;
     border: 1px solid $primary;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: $primary;
     border-radius: 10px;
-  }
-
- 
+}

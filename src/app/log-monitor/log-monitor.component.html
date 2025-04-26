@@ -21,7 +21,7 @@
     </ul>
     <div class="category">Reports</div>
     <ul>
-      <li>
+      <li (click)="goToBlockedIps()">
         <fa-icon [icon]="faBell"></fa-icon>
         <span>Threat Details</span>
     </li>
@@ -62,21 +62,21 @@
         <div class="icon">
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
-        <span>Last 1 minut: </span>
+        <span>Top requests:</span>
         <div class="count">{{ requestCount }}</div>
       </li>
       <li class="card">
         <div class="icon">
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
-        <span>Ameaças Mitigadas:</span>
+        <span>Time requests:</span>
         <div class="count">0</div>
       </li>
       <li class="card">
         <div class="icon">
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
-        <span>Ameaças Mitigadas:</span>
+        <span>Tipos detectados:</span>
         <div echarts [options]="radialOption" class="chart-container"></div>
 
       </li>
@@ -122,16 +122,38 @@
         </ul>
         <div class="logs">
           <h1>Logs em Tempo Real</h1>
-          <ul>
-            <!-- <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li> -->
-            <!-- <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li>
-            <li>Requisicao recebida: IP=0:0:0:0:0:0:0:1 Metodo=GET URI=/welcome Query=null User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) </li> -->
-            <li *ngFor="let log of logs">{{ log }}</li>
-          </ul>
+          <table>
+            <thead>
+              <tr>
+                <th>IP</th>
+                <th>Método</th>
+                <th>URI</th>
+                <th>Agente</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of logs" [ngClass]="log.status">
+                <td class="ip">{{ log.ip }}
+                  <div class="popUp">
+                    <span>Bloquear</span>
+                    <span>Desbloquear</span>
+                  </div>
+                </td>
+                
+                <td>{{ log.method }}</td>
+                <td>{{ log.uri }}</td>
+                <td>{{ log.agent }}</td>
+                <td>
+                  <span *ngIf="log.status === 'sucesso'">✅ Sucesso</span>
+                  <span *ngIf="log.status === 'bloqueado'">🚫 Bloqueado</span>
+                  <span *ngIf="log.status === 'suspeito'">⚠️ Suspeito</span>
+                  <span *ngIf="log.status === 'ddos'">🌊 DDoS</span>
+                  <span *ngIf="log.status === 'normal'">ℹ️ Normal</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="right">

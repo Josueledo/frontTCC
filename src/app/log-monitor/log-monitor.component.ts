@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import * as echarts from 'echarts';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-log-monitor',
@@ -24,8 +25,6 @@ import * as echarts from 'echarts';
   providers: [provideEchartsCore({ echarts })],
 })
 export class LogMonitorComponent {
-  logs: string[] = [];
-  requestCount = 2;
   faMobile = faMobile;
   faGear = faGear;
   faDesktop = faDesktop;
@@ -34,9 +33,12 @@ export class LogMonitorComponent {
   faLayerGroup = faLayerGroup;
   faBell = faBell;
   faExpand = faExpand;
+
+  requestCount = 2;
   base = +new Date(1968, 9, 3);
   oneDay = 24 * 3600 * 1000;
   date: string[] = [];
+  logs: any[] = [];
   lastMobile: any = [];
   lastDesktop: any = [];
   requestLastMobile = 0;
@@ -48,6 +50,7 @@ export class LogMonitorComponent {
   blockedIPs: Set<string> = new Set();
   MAX_REQUESTS_PER_MINUTE = 100;
   ipCounts: Map<string, number> = new Map();
+  ipMatch :any
 
   mobile = {
     tooltip: {
@@ -221,7 +224,11 @@ export class LogMonitorComponent {
     ],
   };
 
-  constructor(private logService: LogService) {}
+  constructor(private logService: LogService, private router: Router) {}
+
+  goToBlockedIps() {
+    this.router.navigate(['/blocks']);
+  }
 
   ngOnInit() {
     for (let i = 1; i < 20000; i++) {
@@ -234,7 +241,8 @@ export class LogMonitorComponent {
 
     this.logService.getLogs().subscribe({
       next: (log) => {
-        this.logs.push(log);
+        this.logs.push(this.parseLog(log));
+        console.log(this.logs)
 
         const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
         const ip = ipMatch ? ipMatch[1] : null;
@@ -264,41 +272,23 @@ export class LogMonitorComponent {
             }, 2 * 60 * 1000); // 2 minutos
           }
         }
+        this.ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
 
-        // Aqui segue sua lógica para mobile/desktop
-        if (log.includes('Android')) {
-          if (ip) {
+        if (ipMatch) {
+          const ip = ipMatch[1];
+        
+          if (log.includes('Android')) {
             this.lastMobile = ip;
             this.requestLastMobile = this.logs.filter((l) =>
-              l.includes(this.lastMobile)
+              l.ip.includes(this.lastMobile)
             ).length;
-          }
-        } else {
-          if (ip) {
+          } else {
             this.lastDesktop = ip;
             console.log(this.lastDesktop);
             this.requestLastDesktop = this.logs.filter((l) =>
-              l.includes(this.lastDesktop)
+              l.ip.includes(this.lastDesktop)
             ).length;
           }
-        }
-
-        if (log.includes('Android')) {
-          const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
-
-          if (ipMatch) {
-            this.lastMobile = ipMatch[1]; // Pegando apenas o IP
-            this.requestLastMobile = this.logs.filter((l) =>
-              l.includes(this.lastMobile)
-            ).length;
-          }
-        } else {
-          const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
-          this.lastDesktop = ipMatch![1]; // Pegando apenas o IP
-          console.log(this.lastDesktop);
-          this.requestLastDesktop = this.logs.filter((l) =>
-            l.includes(this.lastDesktop)
-          ).length;
         }
       },
       error: (err) => {
@@ -343,7 +333,33 @@ export class LogMonitorComponent {
       };
     });
   }
-
+  parseLog(log: string) {
+    const logInfo: any = {};
+  
+    const ipMatch = log.match(/IP: ([^,]+)/);
+    const methodMatch = log.match(/Metodo: ([^,]+)/);
+    const uriMatch = log.match(/URI: ([^,]+)/);
+    const agentMatch = log.match(/Agente: (.+)/);
+  
+    logInfo.ip = ipMatch ? ipMatch[1] : '';
+    logInfo.method = methodMatch ? methodMatch[1] : '';
+    logInfo.uri = uriMatch ? uriMatch[1] : '';
+    logInfo.agent = agentMatch ? agentMatch[1] : '';
+  
+    if (log.includes('🚨')) {
+      logInfo.status = 'suspeito';
+    } else if (log.includes('🌊')) {
+      logInfo.status = 'ddos';
+    } else if (log.includes('✅')) {
+      logInfo.status = 'sucesso';
+    } else if (log.includes('🔒') || log.includes('🚫')) {
+      logInfo.status = 'bloqueado';
+    } else {
+      logInfo.status = 'normal';
+    }
+  
+    return logInfo;
+  }
   updateChart() {
     this.radialOption = {
       ...this.radialOption,
