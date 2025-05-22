@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 84vw;
     height: 100vh;
     align-items: center;
     background-color: $background;
@@ -14,11 +14,10 @@
 
 .content {
     width: 100%;
-    height: auto;
-    min-height: 600px;
+    min-height: 90%;
     display: flex;
     align-items: end;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     background-color: $backgroundDark;
     gap: 10px;
@@ -27,7 +26,9 @@
     border-radius: 10px;
 
 
-    .header {}
+    .header {
+      height: 100%;
+    }
 
     .card_container {
         background-color: $background;
@@ -39,7 +40,7 @@
 
     ul {
         height: 100%;
-        width: 1200px;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -52,7 +53,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
-
+            width: 25%;
+            height: 150px;
             .icon {
                 width: 30px;
                 height: 30px;
@@ -88,8 +90,8 @@
         }
 
         li {
-            width: 25%;
-            height: 120px;
+
+
             background-color: $background;
             list-style: none;
         }
@@ -99,19 +101,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 1200px;
+        width: 100%;
         gap: 10px;
-
+        height: 100%;
+        max-height: 430px;
+        max-height: 20%;
         .left {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 10px;
+          max-height: 430px;
 
             .card {
                 background-color: $background;
-                width: 430px;
+                max-width: 430px;
                 height: 210px;
                 display: flex;
                 flex-direction: column;
@@ -190,7 +195,7 @@
             .logs {
                 background-color: $background;
                 width: 430px;
-                height: 210px;
+                min-height: 210px;
                 overflow-y: scroll;
                 overflow-x: hidden;
                 padding: 15px;
@@ -243,85 +248,6 @@
         }
     }
 }
-
-
-.nav {
-    width: 230px;
-    height: 100vh;
-    background-color: $background;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px;
-
-    .title {
-        color: rgb(211, 211, 211);
-        font-weight: 300;
-
-        span {
-            color: $primary;
-            font-weight: 700;
-        }
-    }
-
-    .items {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .category {
-        color: rgb(119, 119, 119);
-        font-size: .8rem;
-    }
-
-    ul {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: center;
-        list-style: none;
-        gap: 10px;
-
-        li {
-
-            display: flex;
-            gap: 10px;
-            justify-content: start;
-            align-items: center;
-            width: 100%;
-            height: 35px;
-            color: rgb(153, 153, 153);
-            border-radius: 10px;
-            padding: 15px 10px;
-            transition: all .3s;
-
-            span {
-                font-size: .8rem;
-            }
-
-            &.active {
-                background-color: $primary;
-                color: rgb(238, 238, 238);
-            }
-
-            &:hover {
-                cursor: pointer;
-                background-color: $primary;
-                color: rgb(238, 238, 238);
-            }
-        }
-    }
-
-    .footer {
-        color: rgb(107, 107, 107);
-        font-size: .6rem;
-    }
-}
-
 .logs table {
     width: 100%;
     border-collapse: collapse;
@@ -337,7 +263,7 @@
 }
 
 .logs th {
-    font-size: .9rem;
+    font-size: .8rem;
 
 }
 .logs .ip{
@@ -366,19 +292,19 @@
 }
 
 .logs tr.sucesso {
-    background-color: #e0ffe0;
+    background-color: #e0ffe013;
 }
 
 .logs tr.bloqueado {
-    background-color: #ffe0e0;
+    background-color: #ffe0e01a;
 }
 
 .logs tr.suspeito {
-    background-color: #fff3cd;
+    background-color: #fff3cd17;
 }
 
 .logs tr.ddos {
-    background-color: #cce5ff;
+    background-color: #cce5ff17;
 }
 
 .logs tr.normal {

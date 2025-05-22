@@ -11,10 +11,12 @@ import {
   faBell,
   faMobile,
   faDesktop,
+  faLock
 } from '@fortawesome/free-solid-svg-icons';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { Router, RouterLink } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-log-monitor',
@@ -33,6 +35,7 @@ export class LogMonitorComponent {
   faLayerGroup = faLayerGroup;
   faBell = faBell;
   faExpand = faExpand;
+  faLock = faLock
 
   requestCount = 2;
   base = +new Date(1968, 9, 3);
@@ -51,6 +54,8 @@ export class LogMonitorComponent {
   MAX_REQUESTS_PER_MINUTE = 100;
   ipCounts: Map<string, number> = new Map();
   ipMatch :any
+  topIps: { ip: string; count: number }[] = [];
+  public serverStatus: 'online' | 'offline' = 'offline';
 
   mobile = {
     tooltip: {
@@ -129,19 +134,32 @@ export class LogMonitorComponent {
 
   mainOption = {
     title: {
-      color: ['#fffff'],
+      color: 'rgb(123, 2, 192)',
       text: 'Requests per minute',
-      subtext: 'Dados simulados',
+      textStyle: {
+        color: 'white',
+        fontSize: 18, // opcional
+        fontWeight: '400', // opcional
+      },
     },
     tooltip: {
       trigger: 'axis',
     },
     legend: {
-      color: ['#fffff'],
+      labels:{
+        color: 'white',
+      },
+      color: 'white',
       data: ['Requests'],
+      textStyle: {
+        color: 'white',
+        fontSize: 18, // opcional
+        fontWeight: 'bold', // opcional
+      },
     },
     color: ['rgb(123, 2, 192)'],
     toolbox: {
+      color: ['rgb(123, 2, 192)'],
       show: true,
       feature: {
         dataView: { show: true, readOnly: false },
@@ -231,6 +249,7 @@ export class LogMonitorComponent {
   }
 
   ngOnInit() {
+
     for (let i = 1; i < 20000; i++) {
       var now = new Date((this.base += this.oneDay));
       this.date.push(
@@ -242,6 +261,7 @@ export class LogMonitorComponent {
     this.logService.getLogs().subscribe({
       next: (log) => {
         this.logs.push(this.parseLog(log));
+        this.calculateTopIps()
         console.log(this.logs)
 
         const ipMatch = log.match(/IP:\s*([\d.:a-fA-F]+)/);
@@ -276,7 +296,7 @@ export class LogMonitorComponent {
 
         if (ipMatch) {
           const ip = ipMatch[1];
-        
+
           if (log.includes('Android')) {
             this.lastMobile = ip;
             this.requestLastMobile = this.logs.filter((l) =>
@@ -332,20 +352,31 @@ export class LogMonitorComponent {
         ],
       };
     });
+
+    this.logService.checkServerStatus().subscribe(status => {
+      this.serverStatus = status;
+    });
+
+    // Opcional: Verificar a cada 10 segundos
+    interval(10000).subscribe(() => {
+      this.logService.checkServerStatus().subscribe(status => {
+        this.serverStatus = status;
+      });
+    });
   }
   parseLog(log: string) {
     const logInfo: any = {};
-  
+
     const ipMatch = log.match(/IP: ([^,]+)/);
     const methodMatch = log.match(/Metodo: ([^,]+)/);
     const uriMatch = log.match(/URI: ([^,]+)/);
     const agentMatch = log.match(/Agente: (.+)/);
-  
+
     logInfo.ip = ipMatch ? ipMatch[1] : '';
     logInfo.method = methodMatch ? methodMatch[1] : '';
     logInfo.uri = uriMatch ? uriMatch[1] : '';
     logInfo.agent = agentMatch ? agentMatch[1] : '';
-  
+
     if (log.includes('🚨')) {
       logInfo.status = 'suspeito';
     } else if (log.includes('🌊')) {
@@ -357,7 +388,7 @@ export class LogMonitorComponent {
     } else {
       logInfo.status = 'normal';
     }
-  
+
     return logInfo;
   }
   updateChart() {
@@ -398,4 +429,22 @@ export class LogMonitorComponent {
       ],
     };
   }
+
+  calculateTopIps() {
+    const ipCounts: { [ip: string]: number } = {};
+
+    this.logs.forEach((log) => {
+      const ip = log.ip;
+      if (ip) {
+        ipCounts[ip] = (ipCounts[ip] || 0) + 1;
+      }
+    });
+
+    this.topIps = Object.entries(ipCounts)
+      .map(([ip, count]) => ({ ip, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5); // top 5
+  }
+
+
 }

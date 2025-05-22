@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, interval } from 'rxjs';
+import { Observable, BehaviorSubject, interval, map, catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +12,36 @@ export class LogService {
   logsPorMinuto: { [key: string]: number } = {};
   ofensasPorMinuto: { [key: string]: number } = {};
   public logsPorMinuto$ = new BehaviorSubject<{ [key: string]: number }>({});
+  private allLogs: string[] = [];
 
-
-  constructor() {
+  constructor(private http: HttpClient) {
     this.socket = new WebSocket('ws://localhost:8765');
 
     // Atualizar a contagem de requisições a cada 1 minuto
     interval(60000).subscribe(() => this.updateRequestCount());
   }
-  
+  getAllLogs(): string[] {
+    return this.allLogs;
+  }
+  checkServerStatus(): Observable<'online' | 'offline'> {
+    return this.http.get('http://localhost:8080/health', { responseType: 'text' })
+      .pipe(
+        map(() => 'online' as const),
+        catchError(() => of('offline' as const))
+      );
+  }
 
   getLogs(): Observable<string> {
-    
+
     return new Observable(observer => {
       this.socket.onopen = () => console.log('Conectado ao servidor WebSocket!');
 
       this.socket.onmessage = (event) => {
         const agora = new Date();
         const minuto = agora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      
+        this.allLogs.push(event.data);
         this.logsPorMinuto[minuto] = (this.logsPorMinuto[minuto] || 0) + 1;
-      
+
         // Limitar aos últimos 10 minutos
         const chaves = Object.keys(this.logsPorMinuto);
         if (chaves.length > 10) {

@@ -1,55 +1,13 @@
 
 
 <div class="container">
-  <nav class="nav">
-    <div class="title">ATA<span>LAIA</span></div>
 
-
-    <div class="items">
-
-    
-    <div class="category">General</div>
-    <ul>
-      <li class="active">
-        <fa-icon [icon]="faLayerGroup"></fa-icon>
-        <span>Overview</span>
-    </li>
-      <li>
-        <fa-icon [icon]="faFile"></fa-icon>
-        <span>Files</span>
-    </li>
-    </ul>
-    <div class="category">Reports</div>
-    <ul>
-      <li (click)="goToBlockedIps()">
-        <fa-icon [icon]="faBell"></fa-icon>
-        <span>Threat Details</span>
-    </li>
-      <li>
-        <fa-icon [icon]="faBell"></fa-icon>
-        <span>Thereats</span>
-    </li>
-    </ul>
-    <div class="category">Senttings</div>
-    <ul>
-      <li>
-        <fa-icon [icon]="faQuestion"></fa-icon>
-        <span>Help & Supports</span>
-      </li>
-      <li>
-        <fa-icon [icon]="faGear"></fa-icon>
-        <span>Settings</span>
-    </li>
-    </ul>
-  </div>
-    <div class="footer">VertexGuard</div>
-  </nav>
   <div class="content">
 
 
-    
 
- 
+
+
     <ul class="header">
       <li class="card">
         <div class="icon">
@@ -63,14 +21,17 @@
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
         <span>Top requests:</span>
-        <div class="count">{{ requestCount }}</div>
+        <div *ngFor="let item of topIps">
+          <ol>{{ item.ip }} - {{ item.count }} requisições</ol>
+        </div>
       </li>
       <li class="card">
         <div class="icon">
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
-        <span>Time requests:</span>
-        <div class="count">0</div>
+        <div [ngStyle]="{ color: serverStatus === 'online' ? 'green' : 'red' }">
+          Servidor: {{ serverStatus === 'online' ? 'Ativo' : 'Fora do ar' }}
+        </div>
       </li>
       <li class="card">
         <div class="icon">
@@ -121,7 +82,7 @@
           </li>
         </ul>
         <div class="logs">
-          <h1>Logs em Tempo Real</h1>
+          <h1>Logs on real time</h1>
           <table>
             <thead>
               <tr>
@@ -140,7 +101,7 @@
                     <span>Desbloquear</span>
                   </div>
                 </td>
-                
+
                 <td>{{ log.method }}</td>
                 <td>{{ log.uri }}</td>
                 <td>{{ log.agent }}</td>

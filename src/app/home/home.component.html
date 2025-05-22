@@ -1,0 +1,5 @@
+<div class="container">
+    <app-menu  (componentChange)="onComponentChange($event)"></app-menu>
+    <app-log-monitor *ngIf="activeComponent === 'log-monitor'"></app-log-monitor>
+    <app-blockeds *ngIf="activeComponent === 'blocks'"></app-blockeds>
+</div>
