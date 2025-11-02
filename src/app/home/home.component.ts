@@ -14,7 +14,7 @@ import { SettingsComponent } from "../settings/settings.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  activeComponent: string = 'settings'; // começa com log-monitor ou vazio se quiser
+  activeComponent: string = 'help'; // começa com log-monitor ou vazio se quiser
 
   onComponentChange(component: string) {
     this.activeComponent = component;
