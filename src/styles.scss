@@ -1,13 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84vw;
+  height: 100vh;
+  align-items: center;
+  padding: 35px;
+  overflow: hidden;
+
+  background-color: rgb(25, 25, 40);
+  color: rgb(236, 236, 236);
+}
+.content {
+  width: 100%;
+  min-height: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  background-color: rgb(10, 10, 11);
+  gap: 10px;
+  padding: 30px;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 $background: rgb(25, 25, 40);
+$backgroundLight: rgb(46, 46, 68);
 $backgroundDark: rgb(10, 10, 11);
-$primary:rgb(123, 2, 192);
-$primaryHover:rgba(122, 69, 153, 0.075);
-$color:rgba(110, 109, 111, 0.43);
+$primary: rgb(123, 2, 192);
+$primaryHover: rgba(153, 98, 69, 0.075);
+$color: rgba(110, 109, 111, 0.43);
+$font: rgb(236, 236, 236);

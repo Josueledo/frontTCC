@@ -4,10 +4,6 @@
 
   <div class="content">
 
-
-
-
-
     <ul class="header">
       <li class="card">
         <div class="icon">
@@ -21,26 +17,22 @@
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
         <span>Top requests:</span>
-        <div *ngFor="let item of topIps">
-          <ol>{{ item.ip }} - {{ item.count }} requisições</ol>
-        </div>
+        <ul  class="top">
+
+          <li *ngFor="let item of topIps">
+            {{ item.ip }} - {{ item.count }} req
+          </li>
+        </ul>
       </li>
       <li class="card">
-        <div class="icon">
-          <fa-icon [icon]="faExpand"></fa-icon>
+        <div class="icon"  [ngStyle]="{ background: serverStatus === 'online' ? 'green' : 'red' }">
+          <fa-icon [icon]="faExpand" ></fa-icon>
         </div>
         <div [ngStyle]="{ color: serverStatus === 'online' ? 'green' : 'red' }">
           Servidor: {{ serverStatus === 'online' ? 'Ativo' : 'Fora do ar' }}
         </div>
       </li>
-      <li class="card">
-        <div class="icon">
-          <fa-icon [icon]="faExpand"></fa-icon>
-        </div>
-        <span>Tipos detectados:</span>
-        <div echarts [options]="radialOption" class="chart-container"></div>
-
-      </li>
+   
     </ul>
     <div class="footer">
       <div class="left">

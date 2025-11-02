@@ -2,4 +2,6 @@
     <app-menu  (componentChange)="onComponentChange($event)"></app-menu>
     <app-log-monitor *ngIf="activeComponent === 'log-monitor'"></app-log-monitor>
     <app-blockeds *ngIf="activeComponent === 'blocks'"></app-blockeds>
+    <app-help *ngIf="activeComponent==='help'"></app-help>
+    <app-settings *ngIf="activeComponent==='settings'"></app-settings>
 </div>

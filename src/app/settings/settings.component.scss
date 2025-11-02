@@ -1,0 +1,104 @@
+@import "../../styles.scss";
+
+.container {
+    .content {
+        overflow-y: scroll;
+        h2{
+        font-size: 1.2rem;
+    }
+    h1 {
+      padding: 20px 0;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+    .sub {
+      padding: 10px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .card_container {
+        display: flex;
+        gap: 15px;
+        .card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 20px;
+          border: 2px solid gray;
+          border-radius: 15px;
+          width: 150px;
+          height: 70px;
+          .title {
+            font-weight: 600;
+          }
+          .icon {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+    .type {
+      padding: 10px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .card_container {
+        display: flex;
+        gap: 15px;
+        .card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 20px;
+          border: 2px solid gray;
+          border-radius: 15px;
+          width: 250px;
+          height: 110px;
+          .header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            .title {
+              font-weight: 600;
+              font-size: 0.9rem;
+            }
+            .icon {
+              font-size: 0.9rem;
+            }
+          }
+          p {
+            font-size: 0.8rem;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .footer {
+      padding: 10px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .card_container{
+        border: 1px solid gray;
+        border-radius: 15px;
+      }
+      .card{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        .title{
+            font-weight: 600;
+        }
+      }
+    }
+  }
+}

@@ -22,18 +22,15 @@
         <fa-icon [icon]="faLock"></fa-icon>
         <span>Blockeds</span>
       </li>
-      <li>
-        <fa-icon [icon]="faBell"></fa-icon>
-        <span>Thereats</span>
-      </li>
+   
     </ul>
     <div  class="category">Senttings</div>
     <ul>
-      <li>
+      <li [class.active]="selectedItem === 'help'" (click)="changeComponent('help')">
         <fa-icon   [class.active]="selectedItem === 'support'" [icon]="faQuestion"></fa-icon>
         <span>Help & Supports</span>
       </li>
-      <li   [class.active]="selectedItem === 'settings'">
+      <li   [class.active]="selectedItem === 'settings'" (click)="changeComponent('settings')">
         <fa-icon [icon]="faGear"></fa-icon>
         <span>Settings</span>
       </li>

@@ -69,7 +69,7 @@ export class LogMonitorComponent {
     },
     series: [
       {
-        name: 'Access From',
+        name: 'Logs Mobile',
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -88,8 +88,8 @@ export class LogMonitorComponent {
           show: false,
         },
         data: [
-          { value: this.requestLastMobile, name: 'Search Engine' },
-          { value: 30, name: 'Direct' },
+          { value: this.requestLastMobile, name: 'Mobiles' },
+          { value: this.logs.length - this.requestLastMobile, name: 'Outros' },
         ],
       },
     ],
@@ -106,7 +106,7 @@ export class LogMonitorComponent {
     },
     series: [
       {
-        name: 'Access From',
+        name: 'Logs',
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -125,8 +125,8 @@ export class LogMonitorComponent {
           show: false,
         },
         data: [
-          { value: this.requestLastDesktop, name: 'Search Engine' },
-          { value: 30, name: 'Direct' },
+          { value: this.requestLastDesktop, name: 'Desktop' },
+          { value: this.logs.length - this.requestLastDesktop, name: 'Outros' },
         ],
       },
     ],
@@ -410,8 +410,8 @@ export class LogMonitorComponent {
         {
           ...this.mobile.series[0],
           data: [
-            { value: this.requestLastMobile, name: 'Search Engine' },
-            { value: 10, name: 'Direct' },
+            { value: this.requestLastMobile, name: 'Mobile' },
+            { value: this.logs.length - this.requestLastMobile, name: 'Outros' },
           ],
         },
       ],
@@ -422,8 +422,8 @@ export class LogMonitorComponent {
         {
           ...this.desktop.series[0],
           data: [
-            { value: this.requestLastDesktop, name: 'Search Engine' },
-            { value: 10, name: 'Direct' },
+            { value: this.requestLastDesktop, name: 'Desktop' },
+            { value: this.logs.length - this.requestLastDesktop, name: 'Outros' },
           ],
         },
       ],
