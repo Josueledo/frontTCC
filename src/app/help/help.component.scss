@@ -1,64 +1,80 @@
 @import "../../styles.scss";
 
-.container{
-    .content{
-        gap: 40px;
-        overflow-y: scroll;
-        .title{
-            text-align: center;
-            padding-bottom: 30px;
-            h2{
-                font-size: 2rem;
-                font-weight: 500;
-            }
-            p{
-                font-size: .9rem;
-            }
-        }
-        .card_container{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            border: 1px solid gray;
-            border-radius: 15px;
-            gap: 10px;
-            .title{
-                padding: 15px;
-                text-align: start;
-                width: 50%;
-                span{
-                    font-size: 1.5rem;
-                    font-weight: 500;
-                }
-            }
-            .questions{
-                width: 50%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                padding: 25px;
-                gap: 20px;
-                .question{
-                    border-radius: 8px;
-                    padding: 5px;
-                    width: 100%;
-                    height: auto;
-                    background-color: rgb(90, 90, 90);
-                    .title{
-                        width: 100%;
-                        justify-content: space-between;
-                        display: flex;
-                       
-                    }
-                    .icon{
-                    }
-                }
-                display: flex;
-                .anwser{
-                    display: none;
-                }
-            }
-        }
+.container {
+  .content {
+    gap: 40px;
+    overflow-y: scroll;
+    .title {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      text-align: center;
+      padding-bottom: 30px;
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+      p {
+        font-size: 0.9rem;
+        color: var(--fontSecondary);
+      }
     }
+    .card_container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      border: 1px solid var(--borderLight);
+      border-radius: 15px;
+      gap: 10px;
+      .title {
+        padding: 15px;
+        text-align: start;
+        width: 50%;
+        span {
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+      }
+      .questions {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        gap: 20px;
+        .question {
+          border-radius: 8px;
+          padding: 0px;
+          width: 100%;
+          height: auto;
+          background-color: var(--cardLight);
+          display: flex;
+          .title {
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: row;
+          }
+          .icon {
+            width: 20px;
+            height: 20px;
+            color: var(--background);
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        }
+        display: flex;
+        .anwser {
+          display: none;
+        }
+      }
+    }
+  }
 }

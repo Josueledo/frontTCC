@@ -1,21 +1,38 @@
 @import "../../styles.scss";
 
-
 .container {
-
-
-  h1 {
-    color: white;
-  }
-
-  .logs {
-    margin-top: 24px;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-    width: 100%;
-    color: white;
+  .content {
+    text-align: start;
+    align-items: start;
+    .header {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 30px;
+      .title {
+        .text {
+          font-size: 1.5rem;
+          font-weight: 500;
+          color: var(--fontPrimary);
+        }
+        p{
+          font-size: .9rem;
+          color: var(--fontSecondary);
+        }
+      }
+      button {
+        padding: 10px 20px;
+        border: none;
+        background-color: var(--primary);
+        color: var(--background);
+        border: 1px solid var(--primaryHover);
+        border-radius: 10px;
+        &:hover {
+          background-color: var(--primaryHover);
+          border: 1px solid var(--primary);
+        }
+      }
+    }
   }
 }

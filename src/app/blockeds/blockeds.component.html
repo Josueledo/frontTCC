@@ -1,19 +1,19 @@
 <div class="container">
   <div class="content">
-    <h2 class="text-xl font-semibold mb-4">🚫 IPs Bloqueados</h2>
+    <div class="header">
+      <div class="title">
+       <div class="text">IPs Bloqueados</div> 
+       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+      <button>Export</button>
+    </div>
 
-    <table class="table-auto w-full border border-gray-700 text-white">
-      <thead>
-        <tr class="bg-purple-700 text-left">
-          <th class="p-2">Endereço IP</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ip of blockedIPs" class="border-t border-gray-600">
-          <td class="p-2">{{ ip }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <ul>
+      <div class="title">Endereço IP</div>
+      <li *ngFor="let ip of blockedIPs">
+        {{ ip }}
+      </li>
+    </ul>
 
     <p *ngIf="blockedIPs.length === 0" class="text-gray-400 mt-4">
       Nenhum IP bloqueado no momento.

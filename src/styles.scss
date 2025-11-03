@@ -14,9 +14,8 @@
   align-items: center;
   padding: 35px;
   overflow: hidden;
-
-  background-color: rgb(25, 25, 40);
-  color: rgb(236, 236, 236);
+  background-color: var(--background);
+  color: var(--fontPrimary);
 }
 .content {
   width: 100%;
@@ -26,7 +25,7 @@
   align-items: center;
   justify-content: start;
   flex-direction: column;
-  background-color: rgb(10, 10, 11);
+  background-color: var(--background);
   gap: 10px;
   padding: 30px;
   overflow: hidden;
@@ -40,3 +39,15 @@ $primary: rgb(123, 2, 192);
 $primaryHover: rgba(153, 98, 69, 0.075);
 $color: rgba(110, 109, 111, 0.43);
 $font: rgb(236, 236, 236);
+
+:root{
+    --primary: rgb(123, 2, 192);
+    --primaryHover: rgba(122, 2, 192, 0.123);
+    --background: rgb(248, 248, 248);
+    --backgroundDark: rgb(244, 244, 244);
+    --border: rgb(180, 180, 180);
+    --borderLight: rgb(209, 209, 209);
+    --fontPrimary: rgb(31, 31, 31);
+    --fontSecondary: rgb(97, 97, 97);
+    --cardLight: rgb(231, 231, 231);
+}

@@ -1,10 +1,26 @@
 @import "../../styles.scss";
 
 .container {
-    .content {
-        overflow-y: scroll;
-        h2{
-        font-size: 1.2rem;
+  .content {
+    overflow-y: scroll;
+    gap: 30px;
+
+    .main_title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      text-align: start;
+      color: var(--fontPrimary);
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    p {
+      color: var(--fontSecondary);
+      font-size: 0.9rem;
+    }
+    h2 {
+      font-size: 1rem;
     }
     h1 {
       padding: 20px 0;
@@ -24,15 +40,38 @@
         .card {
           display: flex;
           flex-direction: column;
+          color: var(--fontSecondary);
           align-items: center;
           justify-content: center;
           padding: 10px 20px;
-          border: 2px solid gray;
+          border: 2px solid var(--borderLight);
           border-radius: 15px;
           width: 150px;
           height: 70px;
+          &:hover {
+            background-color: var(--primaryHover);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            .icon {
+              color: var(--primary);
+            }
+            .title {
+              color: var(--primary);
+            }
+          }
+          &.active {
+            background-color: var(--primaryHover);
+            border: 2px solid var(--primary);
+            .icon {
+              color: var(--primary);
+            }
+            .title {
+              color: var(--primary);
+            }
+          }
           .title {
             font-weight: 600;
+            font-size: 0.9rem;
           }
           .icon {
             font-size: 0.9rem;
@@ -55,10 +94,31 @@
           align-items: center;
           justify-content: center;
           padding: 10px 20px;
-          border: 2px solid gray;
+          border: 2px solid var(--borderLight);
           border-radius: 15px;
           width: 250px;
           height: 110px;
+          &:hover {
+            background-color: var(--primaryHover);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            .icon {
+              color: var(--primary);
+            }
+            .title {
+              color: var(--primary);
+            }
+          }
+          &.active {
+            background-color: var(--primaryHover);
+            border: 2px solid var(--primary);
+            .icon {
+              color: var(--primary);
+            }
+            .title {
+              color: var(--primary);
+            }
+          }
           .header {
             display: flex;
             gap: 10px;
@@ -75,6 +135,7 @@
           p {
             font-size: 0.8rem;
             text-align: center;
+            color: var(--fontSecondary);
           }
         }
       }
@@ -86,17 +147,25 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      .card_container{
-        border: 1px solid gray;
+      .card_container {
         border-radius: 15px;
       }
-      .card{
+      .card {
         display: flex;
+        border: 1px solid var(--borderLight);
         align-items: center;
         justify-content: space-between;
         padding: 15px;
-        .title{
-            font-weight: 600;
+        &:nth-last-child(-n + 1) {
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+        &:first-child {
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+        }
+        .title {
+          font-weight: 600;
         }
       }
     }

@@ -1,7 +1,15 @@
 <div class="container">
-    <app-menu  (componentChange)="onComponentChange($event)"></app-menu>
-    <app-log-monitor *ngIf="activeComponent === 'log-monitor'"></app-log-monitor>
-    <app-blockeds *ngIf="activeComponent === 'blocks'"></app-blockeds>
-    <app-help *ngIf="activeComponent==='help'"></app-help>
-    <app-settings *ngIf="activeComponent==='settings'"></app-settings>
+  <div
+    class="barStatus"
+    [ngStyle]="{
+      background: serverStatus === 'online' ? 'green' : 'red',
+      'box-shadow':
+        '3px 1px 7px ' + (serverStatus === 'online' ? 'green' : 'red')
+    }"
+  ></div>
+  <app-menu (componentChange)="onComponentChange($event)"></app-menu>
+  <app-log-monitor *ngIf="activeComponent === 'log-monitor'"></app-log-monitor>
+  <app-blockeds *ngIf="activeComponent === 'blocks'"></app-blockeds>
+  <app-help *ngIf="activeComponent === 'help'"></app-help>
+  <app-settings *ngIf="activeComponent === 'settings'"></app-settings>
 </div>

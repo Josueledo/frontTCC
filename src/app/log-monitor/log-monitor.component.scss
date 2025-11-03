@@ -12,7 +12,7 @@
     }
 
     .card_container {
-        background-color: $background;
+        background-color: var(--background);
         padding: 10px;
         border-radius: 10px;
         height: 100%;
@@ -27,7 +27,7 @@
         gap: 10px;
 
         .card {
-            color: rgb(190, 187, 187);
+            color: var(--fontPrimary);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -84,8 +84,10 @@
         li {
 
 
-            background-color: $background;
+            background-color: var(--background);
+            border: 1px solid var(--border);
             list-style: none;
+            
         }
     }
 
@@ -100,24 +102,27 @@
         .left {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
           flex-direction: column;
           gap: 10px;
           max-height: 430px;
+          height: 100%;
 
             .card {
-                background-color: $background;
+                background-color: var(--background);
                 max-width: 430px;
-                height: 210px;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
                 align-items: start;
                 border-radius: 10px;
                 justify-content: center;
+                border: 1px solid var(--border);
                 padding: 20px;
+                
 
                 span {
-                    color: rgb(239, 236, 236);
+                    color: var(--fontPrimary);
                 }
 
                 li {
@@ -162,7 +167,7 @@
 
                         h3 {
                             font-size: 1rem;
-                            color: rgb(239, 238, 238);
+                            color: var(--fontPrimary);
                             font-weight: 500;
                         }
                     }
@@ -171,6 +176,7 @@
                         width: 150px;
                         max-height: 100px;
 
+
                         // background-color: red;
                         .chart-container {
                             width: 200px;
@@ -178,21 +184,22 @@
                         }
                     }
 
-                    border-bottom: 1px solid rgba(128, 128, 128, 0.359);
 
                 }
             }
 
             .logs {
-                background-color: $background;
+                background-color: var(--background);
+                border: 1px solid var(--border);
+                border-radius: 10px;
                 width: 430px;
-                min-height: 210px;
+                min-height: 170px;
                 overflow-y: scroll;
                 overflow-x: hidden;
                 padding: 15px;
 
                 h1 {
-                    color: rgb(167, 167, 167);
+                    color: var(--fontPrimary);
                     font-size: .8rem;
                     font-weight: 400;
                 }
@@ -228,12 +235,13 @@
             height: 430px;
 
             .card {
-                background-color: $background;
+                background-color: var(--background);
                 width: 100%;
                 height: 100%;
-                color: white;
+                color: var(--fontPrimary);
                 border-radius: 10px;
                 padding: 20px;
+                border: 1px solid var(--border);
 
             }
         }
@@ -246,11 +254,11 @@
 
 .logs th,
 .logs td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
     padding: 3px;
     font-weight: 400;
     text-align: center;
-    color: rgb(216, 216, 216);
+    color: black;
 }
 
 .logs th {
@@ -261,7 +269,7 @@
     position: relative;
     &:hover{
         .popUp{
-            display: flex;
+            // display: flex;
         }
     }
     .popUp{
@@ -269,7 +277,7 @@
         position: absolute;
         align-items: center;
         justify-content: center;
-        background-color: $primary;
+        background-color: var(--primary);
         padding: 10px;
         gap: 10px;
         top: 0;

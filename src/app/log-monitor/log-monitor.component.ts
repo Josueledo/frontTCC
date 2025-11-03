@@ -137,7 +137,7 @@ export class LogMonitorComponent {
       color: 'rgb(123, 2, 192)',
       text: 'Requests per minute',
       textStyle: {
-        color: 'white',
+        color: 'rgba(129, 129, 129, 1)',
         fontSize: 18, // opcional
         fontWeight: '400', // opcional
       },
@@ -147,12 +147,12 @@ export class LogMonitorComponent {
     },
     legend: {
       labels:{
-        color: 'white',
+        color: 'gray',
       },
-      color: 'white',
+      color: 'gray',
       data: ['Requests'],
       textStyle: {
-        color: 'white',
+        color:  ['rgb(123, 2, 192)'],
         fontSize: 18, // opcional
         fontWeight: 'bold', // opcional
       },

@@ -1,9 +1,5 @@
-
-
 <div class="container">
-
   <div class="content">
-
     <ul class="header">
       <li class="card">
         <div class="icon">
@@ -17,22 +13,29 @@
           <fa-icon [icon]="faExpand"></fa-icon>
         </div>
         <span>Top requests:</span>
-        <ul  class="top">
-
+        <ul class="top">
           <li *ngFor="let item of topIps">
             {{ item.ip }} - {{ item.count }} req
           </li>
         </ul>
       </li>
-      <li class="card">
-        <div class="icon"  [ngStyle]="{ background: serverStatus === 'online' ? 'green' : 'red' }">
-          <fa-icon [icon]="faExpand" ></fa-icon>
+      <li class="card" [ngStyle]="{
+            border: '1px solid ' + (serverStatus === 'online' ? 'green' : 'red')
+          }">
+        <div
+          class="icon"
+          [ngStyle]="{
+            background: serverStatus === 'online' ? 'green' : 'red'
+          }"
+        >
+          <fa-icon [icon]="faExpand"></fa-icon>
         </div>
+        <span>Status:</span>
+
         <div [ngStyle]="{ color: serverStatus === 'online' ? 'green' : 'red' }">
-          Servidor: {{ serverStatus === 'online' ? 'Ativo' : 'Fora do ar' }}
+          Servidor: {{ serverStatus === "online" ? "Ativo" : "Fora do ar" }}
         </div>
       </li>
-   
     </ul>
     <div class="footer">
       <div class="left">
@@ -40,36 +43,30 @@
           <span>Threat by device</span>
           <li>
             <div class="device_container">
-
               <div class="icon">
                 <fa-icon [icon]="faMobile"></fa-icon>
               </div>
               <div class="device">
                 <span>Last Device IP</span>
-                <h3>{{lastMobile}}</h3>
+                <h3>{{ lastMobile }}</h3>
               </div>
             </div>
             <div class="graph">
               <div echarts [options]="mobile" class="chart-container"></div>
-
-
             </div>
           </li>
           <li>
             <div class="device_container">
-
               <div class="icon">
                 <fa-icon [icon]="faDesktop"></fa-icon>
               </div>
               <div class="device">
                 <span>Last Device IP</span>
-                <h3>{{lastDesktop}}</h3>
+                <h3>{{ lastDesktop }}</h3>
               </div>
             </div>
             <div class="graph">
               <div echarts [options]="desktop" class="chart-container"></div>
-
-
             </div>
           </li>
         </ul>
@@ -87,7 +84,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let log of logs" [ngClass]="log.status">
-                <td class="ip">{{ log.ip }}
+                <td class="ip">
+                  {{ log.ip }}
                   <div class="popUp">
                     <span>Bloquear</span>
                     <span>Desbloquear</span>
@@ -112,10 +110,8 @@
       <div class="right">
         <div class="card">
           <div echarts [options]="mainOption" class="chart-container"></div>
-
         </div>
       </div>
     </div>
-
   </div>
 </div>
