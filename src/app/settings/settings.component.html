@@ -4,26 +4,26 @@
     <div class="sub">
       <div class="header">
         <h2 class="title">Mode</h2>
-        <p>Chose your mode</p>
+        <p>Choose your preferred operating mode.</p>
       </div>
       <div class="card_container">
         <div class="card active">
           <div class="icon">
-            <fa-icon [icon]="faMobile"></fa-icon>
+            <fa-icon [icon]="faThumbtack"></fa-icon>
           </div>
-          <div class="title">Item1</div>
+          <div class="title">Local Mode</div>
         </div>
         <div class="card">
           <div class="icon">
             <fa-icon [icon]="faDesktop"></fa-icon>
           </div>
-          <div class="title">Item1</div>
+          <div class="title">Remote Mode</div>
         </div>
         <div class="card">
           <div class="icon">
-            <fa-icon [icon]="faDesktop"></fa-icon>
+            <fa-icon [icon]="faHouseLaptop"></fa-icon>
           </div>
-          <div class="title">Item1</div>
+          <div class="title">Hybrid Mode</div>
         </div>
       </div>
     </div>
@@ -31,35 +31,29 @@
     <div class="type">
       <div class="text">
         <h2 class="title">Type</h2>
-        <p>Chose your mode</p>
+        <p>Choose your configuration type.</p>
       </div>
       <div class="card_container">
         <div class="card active">
           <div class="header">
-            <div class="icon">
-              <fa-icon [icon]="faDesktop"></fa-icon>
-            </div>
-            <div class="title">Item1</div>
+          
+            <div class="title">Standard</div>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur elit.</p>
+          <p>Default settings for basic monitoring and security.</p>
         </div>
         <div class="card">
           <div class="header">
-            <div class="icon">
-              <fa-icon [icon]="faDesktop"></fa-icon>
-            </div>
-            <div class="title">Item1</div>
+           
+            <div class="title">Advanced</div>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur elit.</p>
+          <p>Enables custom rule sets and detailed event tracking.</p>
         </div>
         <div class="card">
           <div class="header">
-            <div class="icon">
-              <fa-icon [icon]="faDesktop"></fa-icon>
-            </div>
-            <div class="title">Item1</div>
+       
+            <div class="title">Enterprise</div>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur elit.</p>
+          <p>Full-scale setup for high-traffic or multi-server environments.</p>
         </div>
       </div>
     </div>
@@ -67,27 +61,27 @@
     <div class="footer">
       <div class="text">
         <h2 class="title">Filters</h2>
-        <p>Chose what requiremets you want</p>
+        <p>Choose which requirements you want to apply.</p>
       </div>
       <div class="card_container">
         <div class="card">
           <div class="text">
-            <div class="title">Item1</div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div class="title">Suspicious Activity</div>
+            <p>Show only logs with potential threat indicators.</p>
           </div>
           <input type="checkbox" class="button" />
         </div>
         <div class="card">
           <div class="text">
-            <div class="title">Item1</div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div class="title">Failed Logins</div>
+            <p>Focus on repeated unauthorized access attempts.</p>
           </div>
           <input type="checkbox" class="button" />
         </div>
         <div class="card">
           <div class="text">
-            <div class="title">Item1</div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div class="title">Blocked IPs</div>
+            <p>Display entries related to IP addresses currently blocked.</p>
           </div>
           <input type="checkbox" class="button" />
         </div>

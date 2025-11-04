@@ -2,21 +2,21 @@
   <div class="content">
     <div class="header">
       <div class="title">
-       <div class="text">IPs Bloqueados</div> 
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+       <div class="text">Blocked IPs</div> 
+       <p>Monitor and manage IP addresses that have been blocked due to suspicious activity or unauthorized access attempts.</p>
       </div>
       <button>Export</button>
     </div>
 
     <ul>
-      <div class="title">Endereço IP</div>
+      <div class="title">IP addresses</div>
       <li *ngFor="let ip of blockedIPs">
         {{ ip }}
       </li>
     </ul>
 
     <p *ngIf="blockedIPs.length === 0" class="text-gray-400 mt-4">
-      Nenhum IP bloqueado no momento.
+      No blocked IPs at the moment.
     </p>
   </div>
 </div>

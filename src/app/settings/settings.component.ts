@@ -10,6 +10,8 @@ import {
   faMobile,
   faDesktop,
   faLock,
+  faThumbtack,
+  faHouseLaptop
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -22,4 +24,6 @@ import {
 export class SettingsComponent {
   faMobile = faMobile;
   faDesktop = faDesktop;
+  faThumbtack = faThumbtack
+  faHouseLaptop = faHouseLaptop
 }
