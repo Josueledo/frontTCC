@@ -52,6 +52,13 @@
           height: auto;
           background-color: var(--cardLight);
           display: flex;
+          flex-direction: column;
+          transition: all .3s;
+          &.active{
+            .anwser{
+              display: flex;
+            }
+          }
           .title {
             width: 100%;
             justify-content: space-between;
@@ -73,6 +80,7 @@
         display: flex;
         .anwser {
           display: none;
+          padding: 15px;
         }
       }
     }

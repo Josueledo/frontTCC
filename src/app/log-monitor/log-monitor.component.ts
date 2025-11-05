@@ -11,7 +11,11 @@ import {
   faBell,
   faMobile,
   faDesktop,
-  faLock
+  faLock,
+  faRankingStar,
+  faHourglass,
+  faTemperature0,
+  faChartSimple
 } from '@fortawesome/free-solid-svg-icons';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import * as echarts from 'echarts';
@@ -36,6 +40,11 @@ export class LogMonitorComponent {
   faBell = faBell;
   faExpand = faExpand;
   faLock = faLock
+  faRankingStar = faRankingStar
+    faHourglass =  faHourglass
+
+  faTemperature0=faTemperature0
+  faChartSimple = faChartSimple
 
   requestCount = 2;
   base = +new Date(1968, 9, 3);

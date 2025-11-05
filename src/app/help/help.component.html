@@ -4,80 +4,57 @@
       <h2>Frequently asked questions</h2>
       <p>Find answers to common questions about system security, reports, and account management.</p>
     </div>
+
+    <!-- CARD 1 - GENERAL REPORT -->
     <div class="card_container">
       <div class="title">
         <span>General Report</span>
         <p>
-          It provides an overview of your system’s security status, including
-          detected threats, blocked IPs, and user activity summaries.
+          It provides an overview of your system’s security status, including detected threats,
+          blocked IPs, and user activity summaries.
         </p>
       </div>
+
       <div class="questions">
-        <div class="question">
+        <div
+          class="question"
+          *ngFor="let q of faqs.generalReport; let i = index"
+          (click)="toggleFaq('generalReport', i)"
+          [class.active]="q.open"
+        >
           <div class="title">
-            <div class="text">How often are reports updated?</div>
-            <div class="icon">+</div>
+            <div class="text">{{ q.question }}</div>
+            <div class="icon">{{ q.open ? '-' : '+' }}</div>
           </div>
           <div class="anwser">
-            Reports are updated in real time as new data is collected and
-            analyzed.
-          </div>
-        </div>
-        <div class="question">
-          <div class="title">
-            <div class="text">Can I export security reports?</div>
-            <div class="icon">+</div>
-          </div>
-          <div class="anwser">
-            Yes. In the “General Report” section, click Export Report to
-            download a summary in CSV or PDF format.
-          </div>
-        </div>
-        <div class="question">
-          <div class="title">
-            <div class="text">Can I customize the report filters?</div>
-            <div class="icon">+</div>
-          </div>
-          <div class="anwser">
-            Yes. You can filter by date, IP address, or event type to view
-            specific information.
+            {{ q.answer }}
           </div>
         </div>
       </div>
     </div>
+
+    <!-- CARD 2 - BLOCKED IPS -->
     <div class="card_container">
       <div class="title">
         <span>Blocked IPs</span>
         <p>
-         IPs are automatically blocked when the system detects suspicious or unauthorized access attempts.
+          IPs are automatically blocked when the system detects suspicious or unauthorized access attempts.
         </p>
       </div>
+
       <div class="questions">
-        <div class="question">
+        <div
+          class="question"
+          *ngFor="let q of faqs.blockedIps; let i = index"
+          (click)="toggleFaq('blockedIps', i)"
+          [class.active]="q.open"
+        >
           <div class="title">
-            <div class="text">How can I unblock an IP?</div>
-            <div class="icon">+</div>
+            <div class="text">{{ q.question }}</div>
+            <div class="icon">{{ q.open ? '-' : '+' }}</div>
           </div>
           <div class="anwser">
-            Go to the “Blocked IPs” tab, find the IP you want to unblock, and click Unblock.
-          </div>
-        </div>
-        <div class="question">
-          <div class="title">
-            <div class="text">What happens after I unblock an IP?</div>
-            <div class="icon">+</div>
-          </div>
-          <div class="anwser">
-            Once unblocked, the IP regains system access, but monitoring continues to detect future threats.
-          </div>
-        </div>
-        <div class="question">
-          <div class="title">
-            <div class="text">Can I export the list of blocked IPs?</div>
-            <div class="icon">+</div>
-          </div>
-          <div class="anwser">
-            Yes. You can export the current list for auditing or investigation purposes.
+            {{ q.answer }}
           </div>
         </div>
       </div>
